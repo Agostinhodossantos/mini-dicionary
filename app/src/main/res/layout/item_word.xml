@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="0dp"
+    app:cardElevation="0dp"
+    android:focusable="true"
+    android:clickable="true"
+    android:foreground="?attr/clockFaceBackgroundColor"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+   <LinearLayout
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+       <RelativeLayout
+           android:gravity="center_vertical"
+           android:layout_width="match_parent"
+           android:layout_height="60dp">
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="15dp"
+               android:layout_centerVertical="true"
+               android:text="Palavra"/>
+           <TextView
+               android:layout_alignParentEnd="true"
+               android:layout_width="wrap_content"
+               android:text="cng"
+               android:layout_centerVertical="true"
+               android:layout_marginRight="10dp"
+               android:layout_height="wrap_content"/>
+
+       </RelativeLayout>
+       <View
+           android:background="@android:color/black"
+           android:layout_width="match_parent"
+           android:layout_marginLeft="15dp"
+           android:layout_height="0.5dp"/>
+
+
+   </LinearLayout>
+</androidx.cardview.widget.CardView>
