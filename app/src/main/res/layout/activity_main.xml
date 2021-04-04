@@ -27,6 +27,7 @@
                android:text="Dicionario"/>
 
            <EditText
+               android:id="@+id/edSearch"
                android:layout_width="match_parent"
                android:hint="Pesquisar"
                android:paddingLeft="15dp"

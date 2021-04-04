@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ChanganaPortugues">
-        <activity android:name=".AddwordActivity"></activity>
+        <activity android:name=".WordActivity"
+            android:parentActivityName=".MainActivity"
+            ></activity>
+        <activity
+            android:name=".AddwordActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
