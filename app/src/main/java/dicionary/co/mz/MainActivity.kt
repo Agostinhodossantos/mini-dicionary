@@ -1,28 +1,37 @@
 package dicionary.co.mz
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.EditText
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+
 
 class MainActivity : AppCompatActivity() {
 
+
+    val database = FirebaseDatabase.getInstance()
+    val myRef = database.getReference("word")
+    val words = ArrayList<Word>()
+    lateinit var recyclerView: RecyclerView
+    lateinit var context: Context
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var search = findViewById<EditText>(R.id.edSearch);
+        context = this
 
+        var search = findViewById<EditText>(R.id.edSearch);
         search.addTextChangedListener(textWatcher)
 
         val fab = findViewById<FloatingActionButton>(R.id.fab)
@@ -31,23 +40,47 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val recyclerView = findViewById(R.id.rv_words) as RecyclerView
+        recyclerView = findViewById(R.id.rv_words) as RecyclerView
 
         // adding a layoutmanager
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        val words = ArrayList<Word>()
 
-        for(i in 1..10) {
-            words.add(Word("Changana", "Portugues", "Changana Ex", "Portugues ex", "type", "dd","uid"))
-        }
-        val adapter = Adapter(words,this)
-        recyclerView.adapter = adapter
+
+        myRef.addValueEventListener(object : ValueEventListener {
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                words.clear()
+                for (postSnapshot in dataSnapshot.children) {
+                    val word = postSnapshot.getValue(Word::class.java)
+                    if (word != null) {
+                        words.add(word)
+                    }
+                }
+
+
+                val adapter = Adapter(words,context)
+                recyclerView.adapter = adapter
+            }
+
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+
+
+
+
+
 
     }
 
 
 }
+
 
 object textWatcher : TextWatcher {
     override fun afterTextChanged(s: Editable?) {
@@ -55,7 +88,9 @@ object textWatcher : TextWatcher {
     }
 
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-      Log.d("TAG", s.toString())
+        if(count > 3) {
+            filterText(s.toString())
+        }
     }
 
 
@@ -64,3 +99,6 @@ object textWatcher : TextWatcher {
     }
 }
 
+fun  filterText(s: String) {
+
+}

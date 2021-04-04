@@ -9,9 +9,9 @@ import android.widget.Toast
 class WordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        var word =  intent.getSerializableExtra("word") as Word
         setContentView(R.layout.activity_word)
+        var word =  intent.getSerializableExtra("word") as Word
+
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.title = word.changanaWord
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

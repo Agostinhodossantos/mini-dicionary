@@ -9,8 +9,9 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.ValueEventListener
 
-class Adapter (val wordList: ArrayList<Word>, val context: Context): RecyclerView.Adapter<Adapter.ViewHolder>() {
+class Adapter(val wordList: ArrayList<Word>, val context: Context): RecyclerView.Adapter<Adapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Adapter.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_word, parent, false)
         return ViewHolder(v)

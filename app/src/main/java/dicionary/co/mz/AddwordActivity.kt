@@ -20,9 +20,9 @@ class AddwordActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
-        val tvWord = findViewById(R.id.tvWordCng) as EditText
+        val tvWord      = findViewById(R.id.tvWordCng) as EditText
         val tvMeaningPt = findViewById(R.id.tvMeaning) as EditText
-        val tvSynonym = findViewById(R.id.tvSynonym) as EditText
+        val tvSynonym   = findViewById(R.id.tvSynonym) as EditText
         val tvWordClass = findViewById(R.id.tvClass) as EditText;
         val tvExampleCng = findViewById(R.id.tvExampleCng) as EditText;
         val tvExamplePt = findViewById(R.id.tvExamplePt) as EditText;
@@ -58,7 +58,7 @@ class AddwordActivity : AppCompatActivity() {
 
                 myRef.child(uid).setValue(word).addOnSuccessListener {
                     Toast.makeText(this, "Adicionado com sucesso" , Toast.LENGTH_LONG).show()
-                    cleanFiealds();
+                    finish()
                 }
 
             }
