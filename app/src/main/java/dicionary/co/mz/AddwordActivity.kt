@@ -1,13 +1,14 @@
 package dicionary.co.mz
 
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.FirebaseDatabase
 import java.util.*
+
 
 class AddwordActivity : AppCompatActivity() {
 
@@ -51,9 +52,21 @@ class AddwordActivity : AppCompatActivity() {
                 // all things is good
                 var uid = UUID.randomUUID().toString();
                 var word = Word(wordCng, meaningPt, exampleCng , examplePt ,wordClass,synonymCng, uid);
-                Toast.makeText(this, word.toString() , Toast.LENGTH_LONG).show()
+
+                val database = FirebaseDatabase.getInstance()
+                val myRef = database.getReference("word")
+
+                myRef.child(uid).setValue(word).addOnSuccessListener {
+                    Toast.makeText(this, "Adicionado com sucesso" , Toast.LENGTH_LONG).show()
+                    cleanFiealds();
+                }
+
             }
         }
+    }
+
+    private fun cleanFiealds() {
+
     }
 
     fun checkFiels(word: String?): Boolean {
