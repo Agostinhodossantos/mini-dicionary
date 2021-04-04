@@ -1,5 +1,6 @@
 package dicionary.co.mz
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -15,6 +16,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+        val fab = findViewById<FloatingActionButton>(R.id.fab)
+        fab.setOnClickListener {
+            val intent = Intent(this, AddwordActivity::class.java)
+            startActivity(intent)
+        }
+
+
         val recyclerView = findViewById(R.id.rv_words) as RecyclerView
 
         // adding a layoutmanager
@@ -27,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         }
         val adapter = Adapter(words)
         recyclerView.adapter = adapter
+
     }
 
 
